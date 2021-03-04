@@ -2,6 +2,8 @@ package edu.temple.imageactivity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Adapter;
@@ -19,13 +21,10 @@ import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
 
-    ListView listview;
     ImageView imageview;
     Button button;
     Spinner spinner;
-
-    boolean flag;
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,16 +46,17 @@ public class MainActivity extends AppCompatActivity {
         spinner.setAdapter(adapter);
 
 
-        flag = true;
+
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(flag){
-                    //hello there
-                    flag = false; //initial launch, no image display
+                if(position != 0) {
+                    //imageview.setImageResource(catimagearray.get(position - 1));
+                    //Toast.makeText(MainActivity.this, "item selected", Toast.LENGTH_SHORT).show();
+                    sendcat(catarray.get(position-1), catimagearray.get(position-1));
+
                 }else{
-                    imageview.setImageResource(catimagearray.get(position));
-                    Toast.makeText(MainActivity.this, "item selected", Toast.LENGTH_SHORT).show();
+                    imageview.setImageResource(0);
                 }
             }
 
@@ -69,5 +69,14 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(v -> {
             imageview.setImageResource(0); //remove image
         });
+
+
+    }
+
+    public void sendcat(String name, Integer position){
+        Intent intent = new Intent(this, catdisplayactivity.class);
+        intent.putExtra("catname", name);
+        intent.putExtra("catimageposition", position);
+        startActivity(intent);
     }
 }
