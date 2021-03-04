@@ -17,9 +17,13 @@ public class catdisplayactivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display);
 
+
+
         String catname = getIntent().getStringExtra("catname");
         int catimageposition = getIntent().getIntExtra("catimageposition", 0);
 
+
+        setTitle("ImageActivty/"+catname+"/Display"); //set Activity Title
         textview = findViewById(R.id.textview);
         imageview = findViewById(R.id.imageview);
 
