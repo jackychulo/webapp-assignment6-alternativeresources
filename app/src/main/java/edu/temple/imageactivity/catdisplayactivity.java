@@ -23,7 +23,7 @@ public class catdisplayactivity extends AppCompatActivity {
         int catimageposition = getIntent().getIntExtra("catimageposition", 0);
 
 
-        setTitle("ImageActivty/"+catname+"/Display"); //set Activity Title
+        setTitle("Selection/"+catname+"/Display"); //set Activity Title
         textview = findViewById(R.id.textview);
         imageview = findViewById(R.id.imageview);
 

@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        setTitle("Selection");
         ArrayList<String> catarray = new ArrayList<>(Arrays.asList("sushi","tofu","dragonroll"));
         ArrayList<Integer> catimagearray = new ArrayList<Integer>(Arrays.asList(
                 R.drawable.cat1, R.drawable.cat2, R.drawable.cat3
