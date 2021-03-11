@@ -10,6 +10,7 @@ import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -23,53 +24,39 @@ public class MainActivity extends AppCompatActivity {
 
     ImageView imageview;
     Button button;
-    Spinner spinner;
-    
+    //Spinner spinner;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setTitle("Selection");
-        ArrayList<String> catarray = new ArrayList<>(Arrays.asList("sushi","tofu","dragonroll"));
+        setTitle("item selection");
+        ArrayList<String> catarray = new ArrayList<>(Arrays.asList("sushi", "tofu", "dragonroll",
+                "sushi2", "tofu2", "dragonroll2"));
         ArrayList<Integer> catimagearray = new ArrayList<Integer>(Arrays.asList(
-                R.drawable.cat1, R.drawable.cat2, R.drawable.cat3
-                ));
+                R.drawable.cat1, R.drawable.cat2, R.drawable.cat3, R.drawable.cat1,
+                R.drawable.cat2, R.drawable.cat3
+        ));
         //String[] catarray = new String[]{"sushi", "tofu", "dragonroll"};
         //int[] catimagearray = new int[]{R.drawable.cat1, R.drawable.cat2, R.drawable.cat3};
         //ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, catarray);
 
         ImageAdapter adapter = new ImageAdapter(this, catarray, catimagearray);
 
-        imageview = findViewById(R.id.imageView);
-        button = findViewById(R.id.button);
-        spinner = findViewById(R.id.spinner);
-        spinner.setAdapter(adapter);
+        //imageview = findViewById(R.id.imageView);
+        //spinner = findViewById(R.id.spinner);
+        //spinner.setAdapter(adapter);
 
+        GridView gridview = findViewById(R.id.gridview);
+        gridview.setAdapter(adapter);
 
-
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(position != 0) {
-                    //imageview.setImageResource(catimagearray.get(position - 1));
-                    //Toast.makeText(MainActivity.this, "item selected", Toast.LENGTH_SHORT).show();
-                    sendcat(catarray.get(position-1), catimagearray.get(position-1));
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                sendcat(catarray.get(position), catimagearray.get(position));
 
-                }else{
-                    imageview.setImageResource(0);
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                Toast.makeText(MainActivity.this, "item unselected", Toast.LENGTH_SHORT).show();
             }
         });
-
-        button.setOnClickListener(v -> {
-            imageview.setImageResource(0); //remove image
-        });
-
 
     }
 

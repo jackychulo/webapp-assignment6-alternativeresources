@@ -1,6 +1,8 @@
 package edu.temple.imageactivity;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.text.Layout;
 import android.util.Log;
 import android.util.Pair;
 import android.view.Gravity;
@@ -9,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -40,7 +43,8 @@ public class ImageAdapter extends BaseAdapter {
     @Override
     public int getCount() {
         // items + 1 titleview
-        return items.size()+1;
+        //return items.size()+1;
+        return items.size();
     }
 
     @Override
@@ -48,7 +52,8 @@ public class ImageAdapter extends BaseAdapter {
         if(isTitle(position)){
             return null; //if it is title, return nothing
         }else{
-            return items.get(position + 1); //add 1 because of title view;
+            //return items.get(position + 1); //add 1 because of title view;
+            return items.get(position);
         }
     }
 
@@ -60,6 +65,7 @@ public class ImageAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         //convertView refers to views inside the spinner
+        /*
         TextView textview;
 
         if((textview = (TextView) convertView) == null){
@@ -79,8 +85,48 @@ public class ImageAdapter extends BaseAdapter {
         }
 
         return textview;
-    }
+        */
+        TextView textview;
+        ImageView imageview;
 
+        LinearLayout linearlayout;
+        RelativeLayout relativelayout;
+
+        if(convertView == null){
+            linearlayout = new LinearLayout(context);
+            relativelayout = new RelativeLayout(context);
+            textview = new TextView(context);
+            imageview = new ImageView(context);
+
+            linearlayout.setOrientation(LinearLayout.HORIZONTAL);
+            //textview.setPadding(90,100,45,50);
+            textview.setTextSize(18);
+            textview.setTextColor(Color.WHITE);
+            textview.setGravity(Gravity.CENTER);
+
+
+
+
+            //linearlayout.addView(imageview);
+            relativelayout.addView(imageview);
+            imageview.getLayoutParams().height = 300;
+            imageview.getLayoutParams().width = 300;
+            //linearlayout.addView(textview);
+            relativelayout.addView(textview);
+        }else{
+            //linearlayout = (LinearLayout) convertView;
+            relativelayout = (RelativeLayout) convertView;
+            imageview = (ImageView) relativelayout.getChildAt(0);
+            textview = (TextView) relativelayout.getChildAt(1);
+        }
+
+        imageview.setImageResource(imageitems.get(position));
+        textview.setText(items.get(position));
+
+        //return linearlayout;
+        return relativelayout;
+    }
+    /*
     @Override
     public View getDropDownView(int position, View convertView, ViewGroup parent) {
 
@@ -117,4 +163,6 @@ public class ImageAdapter extends BaseAdapter {
 
         return linearlayout;
     }
+
+    */
 }
