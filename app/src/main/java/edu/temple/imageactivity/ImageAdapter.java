@@ -104,7 +104,10 @@ public class ImageAdapter extends BaseAdapter {
             textview.setTextColor(Color.WHITE);
             textview.setGravity(Gravity.CENTER);
 
-
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+                    RelativeLayout.LayoutParams.WRAP_CONTENT,
+                    RelativeLayout.LayoutParams.WRAP_CONTENT);
+            params.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
 
 
             //linearlayout.addView(imageview);
@@ -112,7 +115,7 @@ public class ImageAdapter extends BaseAdapter {
             imageview.getLayoutParams().height = 300;
             imageview.getLayoutParams().width = 300;
             //linearlayout.addView(textview);
-            relativelayout.addView(textview);
+            relativelayout.addView(textview, params);
         }else{
             //linearlayout = (LinearLayout) convertView;
             relativelayout = (RelativeLayout) convertView;
