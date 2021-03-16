@@ -30,10 +30,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setTitle("item selection");
+        //setTitle("item selection");
         ArrayList<String> catarray = new ArrayList<>(Arrays.asList("sushi", "tofu", "dragonroll",
                 "sushi2", "tofu2", "dragonroll2"));
-        ArrayList<Integer> catimagearray = new ArrayList<Integer>(Arrays.asList(
+        ArrayList<Integer> catimagearray = new ArrayList<>(Arrays.asList(
                 R.drawable.cat1, R.drawable.cat2, R.drawable.cat3, R.drawable.cat1,
                 R.drawable.cat2, R.drawable.cat3
         ));
@@ -41,7 +41,9 @@ public class MainActivity extends AppCompatActivity {
         //int[] catimagearray = new int[]{R.drawable.cat1, R.drawable.cat2, R.drawable.cat3};
         //ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, catarray);
 
-        ImageAdapter adapter = new ImageAdapter(this, catarray, catimagearray);
+        ImageAdapter adapter = new ImageAdapter(this,
+                getResources().getStringArray(R.array.catarrayname),
+                catimagearray);
 
         //imageview = findViewById(R.id.imageView);
         //spinner = findViewById(R.id.spinner);
@@ -53,7 +55,9 @@ public class MainActivity extends AppCompatActivity {
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                sendcat(catarray.get(position), catimagearray.get(position));
+                //sendcat(catarray.get(position), catimagearray.get(position));
+                sendcat(getResources().getStringArray(R.array.catarrayname)[position],
+                        catimagearray.get(position));
 
             }
         });

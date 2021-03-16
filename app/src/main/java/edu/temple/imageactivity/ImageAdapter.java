@@ -2,9 +2,6 @@ package edu.temple.imageactivity;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.text.Layout;
-import android.util.Log;
-import android.util.Pair;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,22 +11,15 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-
 import java.util.ArrayList;
 
 public class ImageAdapter extends BaseAdapter {
 
     Context context;
-    ArrayList<String> items;
+    String[] items;
     ArrayList<Integer> imageitems;
 
-    String instruction = "choose item from cat list"; //title text
-
-    public ImageAdapter (Context context, ArrayList items, ArrayList imageitems){
+    public ImageAdapter (Context context, String[] items, ArrayList<Integer> imageitems){
         this.context = context;
         this.items = items;
         this.imageitems = imageitems;
@@ -44,7 +34,7 @@ public class ImageAdapter extends BaseAdapter {
     public int getCount() {
         // items + 1 titleview
         //return items.size()+1;
-        return items.size();
+        return items.length;
     }
 
     @Override
@@ -53,7 +43,7 @@ public class ImageAdapter extends BaseAdapter {
             return null; //if it is title, return nothing
         }else{
             //return items.get(position + 1); //add 1 because of title view;
-            return items.get(position);
+            return items[position];
         }
     }
 
@@ -64,28 +54,6 @@ public class ImageAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        //convertView refers to views inside the spinner
-        /*
-        TextView textview;
-
-        if((textview = (TextView) convertView) == null){
-            textview = new TextView(context);
-            //absolute positioning, warp content
-            textview.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT));
-            //centered text
-            textview.setGravity(Gravity.CENTER_HORIZONTAL);
-            textview.setTextSize(21);
-        }
-
-        if(isTitle(position)){
-            textview.setText(instruction);
-        }else{
-            textview.setText(items.get(position - 1));
-        }
-
-        return textview;
-        */
         TextView textview;
         ImageView imageview;
 
@@ -124,7 +92,7 @@ public class ImageAdapter extends BaseAdapter {
         }
 
         imageview.setImageResource(imageitems.get(position));
-        textview.setText(items.get(position));
+        textview.setText(items[position]);
 
         //return linearlayout;
         return relativelayout;

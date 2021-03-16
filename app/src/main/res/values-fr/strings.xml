@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">sélection d\'articles</string>
+    <string name="select_something">sélectionnez quelque chose</string>
+    <string-array name="catarrayname">
+        <item>sushi</item>
+        <item>rouleau de dragon</item>
+        <item>tofu</item>
+        <item>cachapa</item>
+        <item>poulet frit</item>
+        <item>gaufres</item>
+    </string-array>
+</resources>
